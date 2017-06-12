@@ -1,6 +1,6 @@
 ﻿namespace FormCadastro
 {
-    partial class Form1
+    partial class FormCadastro
     {
         /// <summary>
         /// Required designer variable.
