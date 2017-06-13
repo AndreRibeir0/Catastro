@@ -31,20 +31,23 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtCPFCNPJ = new System.Windows.Forms.MaskedTextBox();
+            this.txtCPF = new System.Windows.Forms.MaskedTextBox();
             this.lblCPFCNPJ = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.dtpDataNascimento = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnPesquisar = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Location = new System.Drawing.Point(12, 251);
+            this.button1.Location = new System.Drawing.Point(12, 217);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(209, 56);
+            this.button1.Size = new System.Drawing.Size(208, 40);
             this.button1.TabIndex = 39;
             this.button1.Text = "CADASTRAR";
             this.button1.UseVisualStyleBackColor = false;
@@ -68,13 +71,13 @@
             this.label1.TabIndex = 37;
             this.label1.Text = "Nome";
             // 
-            // txtCPFCNPJ
+            // txtCPF
             // 
-            this.txtCPFCNPJ.Location = new System.Drawing.Point(12, 85);
-            this.txtCPFCNPJ.Mask = "000,000,000-00";
-            this.txtCPFCNPJ.Name = "txtCPFCNPJ";
-            this.txtCPFCNPJ.Size = new System.Drawing.Size(208, 20);
-            this.txtCPFCNPJ.TabIndex = 35;
+            this.txtCPF.Location = new System.Drawing.Point(12, 85);
+            this.txtCPF.Mask = "000,000,000-00";
+            this.txtCPF.Name = "txtCPF";
+            this.txtCPF.Size = new System.Drawing.Size(208, 20);
+            this.txtCPF.TabIndex = 35;
             // 
             // lblCPFCNPJ
             // 
@@ -116,15 +119,50 @@
             this.txtNome.Size = new System.Drawing.Size(208, 20);
             this.txtNome.TabIndex = 31;
             // 
+            // btnEditar
+            // 
+            this.btnEditar.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnEditar.Location = new System.Drawing.Point(11, 263);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(209, 40);
+            this.btnEditar.TabIndex = 40;
+            this.btnEditar.Text = "EDITAR";
+            this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // btnPesquisar
+            // 
+            this.btnPesquisar.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnPesquisar.Location = new System.Drawing.Point(11, 309);
+            this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.Size = new System.Drawing.Size(209, 40);
+            this.btnPesquisar.TabIndex = 41;
+            this.btnPesquisar.Text = "PESQUISAR";
+            this.btnPesquisar.UseVisualStyleBackColor = false;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button2.Location = new System.Drawing.Point(11, 355);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(209, 40);
+            this.button2.TabIndex = 42;
+            this.button2.Text = "DELETAR";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
             // FormCadastro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(242, 336);
+            this.ClientSize = new System.Drawing.Size(239, 405);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnPesquisar);
+            this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtCPFCNPJ);
+            this.Controls.Add(this.txtCPF);
             this.Controls.Add(this.lblCPFCNPJ);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.dtpDataNascimento);
@@ -142,12 +180,15 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MaskedTextBox txtCPFCNPJ;
+        private System.Windows.Forms.MaskedTextBox txtCPF;
         private System.Windows.Forms.Label lblCPFCNPJ;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.DateTimePicker dtpDataNascimento;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Button btnPesquisar;
+        private System.Windows.Forms.Button button2;
     }
 }
 

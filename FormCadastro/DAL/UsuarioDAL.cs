@@ -35,5 +35,37 @@ namespace DAL
             }//Fim da cláusula USING, o método Dispose da conexão será chamado.
         }
 
+        public UsuarioDTO Pequisar(UsuarioDTO cliente)
+        {
+           
+            using (SqlConnection connection = new SqlConnection())
+            {
+                //
+                // Open the SqlConnection.
+                //
+                connection.ConnectionString =
+                    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Cadastro;Integrated Security=True";
+                connection.Open();
+
+                SqlCommand command = new SqlCommand("SELECT TOP  * FROM USUARIO WHERE CPF = @CPF", connection);
+                // Define as informações do parâmetro criado
+                command.Parameters.AddWithValue("@CPF", cliente.CPF);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        UsuarioDTO client = new UsuarioDTO();
+                        client.Nome = reader["NOME"].ToString();
+                        client.CPF = reader["CPF"].ToString();
+                        client.DataNascimento = Convert.ToDateTime(reader["DATANASCIMENTO"]);
+                        client.Email = reader["EMAIL"].ToString();
+                        client.Ativo = Convert.ToBoolean(reader["ATIVO"]);
+                        return client;
+                    }
+                }
+            }
+            return cliente;            
+        }
     }
 }

@@ -23,18 +23,58 @@ namespace FormCadastro
         {
             UsuarioDTO cliente = new UsuarioDTO();
             cliente.Nome = txtNome.Text;
-            cliente.CPF = txtCPFCNPJ.Text;
+            cliente.CPF = txtCPF.Text;
             cliente.Email = txtEmail.Text;
             cliente.DataNascimento = dtpDataNascimento.Value;
             try
             {
-                new UsuarioBLL().ValidarCliente(cliente);
+                new UsuarioBLL().ValidarCasatroCliente(cliente);
                 MessageBox.Show("Cadastrado com sucesso.");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            UsuarioDTO cliente = new UsuarioDTO();
+            cliente.Nome = txtNome.Text;
+            cliente.CPF = txtCPF.Text;
+            cliente.Email = txtEmail.Text;
+            cliente.DataNascimento = dtpDataNascimento.Value;
+            try
+            {
+                new UsuarioBLL().ValidarCliente(cliente);
+                MessageBox.Show("Editado com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            UsuarioDTO cliente = new UsuarioDTO();
+            
+            try
+            {
+                UsuarioBLL clienteBLL = new UsuarioBLL();            
+                cliente = clienteBLL.ValidarPesquisaCliente(cliente);
+                cliente.Nome = txtNome.Text;
+                cliente.CPF = txtCPF.Text;
+                cliente.Email = txtEmail.Text;
+                //cliente.DataNascimento = dtpDataNascimento.Value;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
         }
     }
 }
