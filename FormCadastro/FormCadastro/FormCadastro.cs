@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,24 @@ namespace FormCadastro
         public FormCadastro()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UsuarioDTO cliente = new UsuarioDTO();
+            cliente.Nome = txtNome.Text;
+            cliente.CPF = txtCPFCNPJ.Text;
+            cliente.Email = txtEmail.Text;
+            cliente.DataNascimento = dtpDataNascimento.Value;
+            try
+            {
+                new UsuarioBLL().ValidarCliente(cliente);
+                MessageBox.Show("Cadastrado com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
