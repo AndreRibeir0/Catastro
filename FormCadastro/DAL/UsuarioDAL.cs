@@ -35,6 +35,40 @@ namespace DAL
             }//Fim da cláusula USING, o método Dispose da conexão será chamado.
         }
 
+        public List<UsuarioDTO> LerTodos()
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                //string de conexão
+                connection.ConnectionString =
+                    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Cadastro;Integrated Security=True";
+                SqlCommand command = new SqlCommand();
+                command.CommandText =
+                    "SELECT * FROM USUARIO";                
+                command.Connection = connection;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                List<UsuarioDTO> clientes = new List<UsuarioDTO>();
+                while(reader.Read())
+                {
+                    //Como o objeto reader ["COLUNABANCO"] retorna um OBJETO
+                    //é papel do programador fazer uma conversão para
+                    //o tipo especifico da classe
+                    UsuarioDTO cliente = new UsuarioDTO();
+                    cliente.ID = Convert.ToInt32(reader["ID"]);
+                    cliente.Nome = (string)reader["NOME"];
+                    cliente.CPF = (string)reader["CPF"];
+                    cliente.DataNascimento = (DateTime)reader["DATANASCIMENTO"];
+                    cliente.Email = (string)reader["EMAIL"];
+                    cliente.Ativo = (bool)reader["ATIVO"];
+                    clientes.Add(cliente);             
+                }
+                return clientes;
+            }//Fim da cláusula USING, o método Dispose da conexão será chamado.          
+            
+        }
+
+
         public UsuarioDTO Pequisar(UsuarioDTO cliente)
         {
            

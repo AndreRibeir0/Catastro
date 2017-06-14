@@ -19,6 +19,8 @@ namespace FormCadastro
             InitializeComponent();
         }
 
+        UsuarioBLL bll = new UsuarioBLL();
+
         private void button1_Click(object sender, EventArgs e)
         {
             UsuarioDTO cliente = new UsuarioDTO();
@@ -30,6 +32,7 @@ namespace FormCadastro
             {
                 new UsuarioBLL().ValidarCasatroCliente(cliente);
                 MessageBox.Show("Cadastrado com sucesso.");
+                dataGridView1.DataSource = bll.LerTodos();
             }
             catch (Exception ex)
             {
@@ -80,6 +83,11 @@ namespace FormCadastro
             }
             //36866666775
 
+        }
+
+        private void FormCadastro_Load(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = bll.LerTodos();
         }
     }
 }

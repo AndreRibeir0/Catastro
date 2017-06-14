@@ -103,5 +103,17 @@ namespace BLL
             return builder;
 
         }
+
+        public List<UsuarioDTO> LerTodos()
+        {
+            UsuarioDAL dal = new UsuarioDAL();
+            List<UsuarioDTO> clientes = dal.LerTodos();
+            for (int i = 0; i < clientes.Count; i++)
+            {
+                clientes[i].CPF = clientes[i].CPF.Insert(3, ".").Insert(7, ".").Insert(11, "-");
+
+            }
+            return clientes;
+        }
     }
 }
