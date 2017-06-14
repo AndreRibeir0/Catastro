@@ -115,5 +115,11 @@ namespace BLL
             }
             return clientes;
         }
+
+        public void ExcluirCliente(int id)
+        {
+            UsuarioDAL dal = new UsuarioDAL();
+            dal.Excluir(id);
+        }
     }
 }

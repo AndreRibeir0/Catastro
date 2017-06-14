@@ -103,5 +103,27 @@ namespace DAL
             }
             return cliente;            
         }
+
+        public void Excluir(int idCliente)
+        {
+            //Framework - *ADO.NET* / NHibernate / Entity Framework
+            //Responsável por realizar uma conexão física com o banco
+            //de dados
+            using (SqlConnection connection = new SqlConnection())
+            {
+                //string de conexão
+                connection.ConnectionString =
+                    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Cadastro;Integrated Security=True";
+                SqlCommand command = new SqlCommand();
+                command.CommandText =
+                    "DELETE FROM USUARIO WHERE ID = @ID";
+                //Informa o valor do parâmetro @ID, neste caso, o ID do cliente
+                //que queremos excluir
+                command.Parameters.AddWithValue("@ID", idCliente);               
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+            }//Fim da cláusula USING, o método Dispose da conexão será chamado.
+        }
     }
 }
