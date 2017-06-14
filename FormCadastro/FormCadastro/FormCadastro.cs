@@ -59,22 +59,27 @@ namespace FormCadastro
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             UsuarioDTO cliente = new UsuarioDTO();
-            
+            cliente.Nome = txtNome.Text;
+            cliente.CPF = txtCPF.Text;
+            cliente.Email = txtEmail.Text;
+            cliente.DataNascimento = dtpDataNascimento.Value;
+
             try
             {
                 UsuarioBLL clienteBLL = new UsuarioBLL();            
                 cliente = clienteBLL.ValidarPesquisaCliente(cliente);
-                cliente.Nome = txtNome.Text;
-                cliente.CPF = txtCPF.Text;
-                cliente.Email = txtEmail.Text;
-                //cliente.DataNascimento = dtpDataNascimento.Value;
+                txtNome.Text = cliente.Nome;
+                txtCPF.Text = cliente.CPF;
+                txtEmail.Text = cliente.Email;
+                dtpDataNascimento.Value = cliente.DataNascimento;               
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-           
+            //36866666775
+
         }
     }
 }

@@ -48,26 +48,32 @@ namespace BLL
             }
         }
 
+        /// <summary>
+        /// Método que retorna um tipo UsuarioDTO carregado com os dados do banco
+        /// </summary>
+        /// <param name="UsuarioDTO"></param>
+        /// <returns></returns>
         public UsuarioDTO ValidarPesquisaCliente(UsuarioDTO cliente)
         {
-            StringBuilder builder = new ValidatorUsuarioBLL().ValidatorUsuario(cliente);
+            //StringBuilder builder = new ValidatorUsuarioBLL().ValidatorUsuario(cliente);
 
-            try
-            {
-                StringBuilder Builder = ValidarCliente(cliente);
+            //try
+            //{
+                //StringBuilder Builder = ValidarCliente(cliente);
                
-            }
-            catch (Exception)
-            {
+            //}
+            //catch (Exception)
+            //{
 
-                throw new Exception(builder.ToString());
-            }
+                //throw new Exception(builder.ToString());
+            //}
 
             UsuarioDAL pes = new UsuarioDAL();
             try
             {
 
-                return pes.Pequisar(cliente);
+                UsuarioDTO usuario = pes.Pequisar(cliente);
+                return usuario;
                     
             }
             catch (Exception ex)

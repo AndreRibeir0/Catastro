@@ -13,7 +13,7 @@ namespace BLL
         /// <summary>
         /// Método validator do Usuario que retorna um StringBuilder
         /// </summary>
-        /// <param name="cliente">Objeto que possui os dados do usuario a ser validado
+        /// <param name="UsuarioDTO">Objeto que possui os dados do usuario a ser validado
         /// <returns></returns>
         public StringBuilder ValidatorUsuario(UsuarioDTO cliente)
         {

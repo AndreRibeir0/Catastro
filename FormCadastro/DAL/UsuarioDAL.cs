@@ -44,12 +44,14 @@ namespace DAL
                 // Open the SqlConnection.
                 //
                 connection.ConnectionString =
-                    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Cadastro;Integrated Security=True";
+                    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Cadastro;Integrated Security=True";                
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("SELECT TOP  * FROM USUARIO WHERE CPF = @CPF", connection);
+                SqlCommand command = new SqlCommand("SELECT * FROM USUARIO WHERE CPF = @CPF", connection);
                 // Define as informações do parâmetro criado
+                cliente.CPF = cliente.CPF.Replace("-", "").Replace(".", "");
                 command.Parameters.AddWithValue("@CPF", cliente.CPF);
+                command.Connection = connection;
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
