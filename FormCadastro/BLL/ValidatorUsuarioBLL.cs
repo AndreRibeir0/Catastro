@@ -15,7 +15,7 @@ namespace BLL
         /// </summary>
         /// <param name="UsuarioDTO">Objeto que possui os dados do usuario a ser validado
         /// <returns></returns>
-        public StringBuilder ValidatorUsuario(UsuarioDTO cliente)
+        public void ValidatorUsuario(UsuarioDTO cliente)
         {
             StringBuilder builder = new StringBuilder();
             if (string.IsNullOrWhiteSpace(cliente.Nome))
@@ -43,7 +43,12 @@ namespace BLL
                 builder.AppendLine("Apenas maior de idade.");
             }
 
-            return builder;
+            //Lança uma exceção caso o StringBuilder esteja preenchido
+            //com algum erro
+            if (builder.Length > 0)
+            {
+                throw new Exception(builder.ToString());
+            }
         }
     }
 }

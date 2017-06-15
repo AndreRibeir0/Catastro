@@ -14,6 +14,8 @@ namespace FormCadastro
 {
     public partial class FormCadastro : Form
     {
+
+
         public FormCadastro()
         {
             InitializeComponent();
@@ -26,19 +28,18 @@ namespace FormCadastro
             LimparCampos();
             txtID.ForeColor = Color.Red;
             txtID.Text = "*ID GERADO AUTOMATICAMENTE*";
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
             btnRefresh.Enabled = false;
-            btnExcluir.Enabled = false;
-            btnEditar.Enabled = false;
             btnCadastrar.Enabled = true;
-
         }
 
         private void DesabilitarNovo()
         {
             txtID.ForeColor = SystemColors.WindowText;
             btnCadastrar.Enabled = false;
-            btnEditar.Enabled = true;
-            btnExcluir.Enabled = true;
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
             btnRefresh.Enabled = true;
         }
 
@@ -47,21 +48,24 @@ namespace FormCadastro
             txtID.Clear();
             txtEmail.Clear();
             txtNome.Clear();
-            txtCPF.Clear();
+            txtCPFCNPJ.Clear();
             dtpDataNascimento.Value = DateTime.Now;
-        }
+        }                        
+                      
 
-        private void btnCadastrar_Click(object sender, EventArgs e)
+        private void btnCadastrar_Click_1(object sender, EventArgs e)
         {
+            //CRUD
             UsuarioDTO cliente = new UsuarioDTO();
             cliente.Nome = txtNome.Text;
-            cliente.CPF = txtCPF.Text;
+            cliente.CPF = txtCPFCNPJ.Text;
             cliente.Email = txtEmail.Text;
             cliente.DataNascimento = dtpDataNascimento.Value;
             try
             {
-                new UsuarioBLL().ValidarCasatroCliente(cliente);
+                bll.CadastrarCliente(cliente);
                 MessageBox.Show("Cadastrado com sucesso.");
+                LimparCampos();
                 dataGridView1.DataSource = bll.LerTodos();
                 DesabilitarNovo();
             }
@@ -69,86 +73,94 @@ namespace FormCadastro
             {
                 MessageBox.Show(ex.Message);
             }
-            
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnPesquisar_Click(object sender, EventArgs e)
-        {
-            UsuarioDTO cliente = new UsuarioDTO();
-            cliente.Nome = txtNome.Text;
-            cliente.CPF = txtCPF.Text;
-            cliente.Email = txtEmail.Text;
-            cliente.DataNascimento = dtpDataNascimento.Value;
-
-            try
-            {
-                UsuarioBLL clienteBLL = new UsuarioBLL();            
-                cliente = clienteBLL.ValidarPesquisaCliente(cliente);
-                txtNome.Text = cliente.Nome;
-                txtCPF.Text = cliente.CPF;
-                txtEmail.Text = cliente.Email;
-                dtpDataNascimento.Value = cliente.DataNascimento;               
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            //36866666775
-
-        }
-
-        private void btnExcluir_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Tem ceteza que deseja excluir esse registro?", 
-                "Confirmação de exclusão",MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == System.Windows.Forms.DialogResult.No)
-            {
-                return;
-            }
-
-            try
-            {
-                bll.ExcluirCliente(Convert.ToInt32(txtID.Text));
-                MessageBox.Show("Excluído com sucesso.");
-                dataGridView1.DataSource = bll.LerTodos();
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("Erro no banco de dados, contate o adm.");
-            }
-        }
-
-        private void FormCadastro_Load(object sender, EventArgs e)
+        private void FormCadastro_Load_1(object sender, EventArgs e)
         {
             dataGridView1.DataSource = bll.LerTodos();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
         {
             UsuarioDTO cliente = (UsuarioDTO)dataGridView1.SelectedRows[0].DataBoundItem;
             txtID.Text = cliente.ID.ToString();
             txtNome.Text = cliente.Nome;
             txtEmail.Text = cliente.Email;
-            txtCPF.Text = cliente.CPF;
+            txtCPFCNPJ.Text = cliente.CPF;
+            dtpDataNascimento.Value = cliente.DataNascimento;
             DesabilitarNovo();
-
         }
 
-        private void btnNovo_Click(object sender, EventArgs e)
+        private void btnNovo_Click_1(object sender, EventArgs e)
         {
             HabilitarNovo();
         }
 
-        
-        
+        private void btnRefresh_Click_1(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = bll.LerTodos();
+        }
 
+        private void btnDelete_Click_1(object sender, EventArgs e)
+        {
+                                    
+            DialogResult result =
+                MessageBox.Show("Você tem certeza que deseja excluir este registro?",
+                                "Confirmação de Exclusão",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question);
+            if (result == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+                       
+
+            try
+            {
+                int aux = 0;
+                int.TryParse(txtID.Text, out aux);
+                bll.ExcluirCliente(Convert.ToInt32(aux));
+                MessageBox.Show("Excluído com sucesso.");
+                dataGridView1.DataSource = bll.LerTodos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+        private void btnUpdate_Click_1(object sender, EventArgs e)
+        {
+            UsuarioDTO cliente = new UsuarioDTO();
+
+            try
+            {
+                
+                cliente.ID = Convert.ToInt32(txtID.Text);
+                cliente.Nome = txtNome.Text;
+                cliente.CPF = txtCPFCNPJ.Text;
+                cliente.Email = txtEmail.Text;
+                cliente.DataNascimento = dtpDataNascimento.Value;
+            }
+            catch (FormatException)
+            {
+               
+            }           
+          
+            try
+            {
+
+                bll.EditarCliente(cliente);
+                MessageBox.Show("Editado com sucesso.");
+                LimparCampos();
+                dataGridView1.DataSource = bll.LerTodos();
+                DesabilitarNovo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

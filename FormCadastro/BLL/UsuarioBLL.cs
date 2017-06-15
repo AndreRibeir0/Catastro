@@ -14,29 +14,30 @@ namespace BLL
     {
         /// <summary>
         /// Método que verifica propriedade por propriedade do objeto cliente
-        /// e lança uma exceção de erros do objeto.
+        /// e lança uma exceção com a somatória de erros do objeto.
         /// Caso nenhuma exceção seja lançada, o método não faz nada.
         /// </summary>
-        /// <param name="UsuarioDTO">Objeto que possui os dados do cliente a ser validado
+        /// <param name="cliente">Objeto que possui os dados do cliente a ser validado
         /// </param>
-        public void ValidarCasatroCliente(UsuarioDTO cliente)
+        public void ValidarCliente(UsuarioDTO cliente)
         {
-            StringBuilder builder = new ValidatorUsuarioBLL().ValidatorUsuario(cliente);
+            new ValidatorUsuarioBLL().ValidatorUsuario(cliente);
 
-            try
-            {
-                StringBuilder Builder = ValidarCliente(cliente);
-            }
-            catch (Exception)
-            {
-                throw new Exception(builder.ToString());
-            }
-                
+            //Remove a máscara
+            cliente.CPF = cliente.CPF.Replace("-", "").Replace(".", "");
+            cliente.Ativo = true;          
+            
 
+        }
+
+        public void CadastrarCliente(UsuarioDTO cliente)
+        {
+            ValidarCliente(cliente);
+            //Se chegou aqui, o cliente está validado e nenhuma exceção
+            //foi lançada. Podemos cadastrá-lo no banco de dados.
             UsuarioDAL dal = new UsuarioDAL();
             try
             {
-                
                 dal.Cadastrar(cliente);
             }
             catch (Exception ex)
@@ -44,64 +45,51 @@ namespace BLL
                 //Loga o erro para o administrador
                 File.AppendAllText("log.txt", ex.Message + "\r\n" + ex.StackTrace);
                 //Relança a exceção e a captura na interface gráfica
-                throw new Exception("Erro no banco de dados. Contate o adm.");
+                throw new Exception("Erro no banco de dados durante o Cadastro. Contate o adm.");
             }
+
         }
 
-        /// <summary>
-        /// Método que retorna um tipo UsuarioDTO carregado com os dados do banco
-        /// </summary>
-        /// <param name="UsuarioDTO"></param>
-        /// <returns></returns>
-        public UsuarioDTO ValidarPesquisaCliente(UsuarioDTO cliente)
+        public void EditarCliente(UsuarioDTO cliente)
         {
-            //StringBuilder builder = new ValidatorUsuarioBLL().ValidatorUsuario(cliente);
+            if (cliente.ID == 0)
+            {
+                throw new Exception("Para editar primeiro selecione um usuario cadastrado");
+            }
 
-            //try
-            //{
-                //StringBuilder Builder = ValidarCliente(cliente);
-               
-            //}
-            //catch (Exception)
-            //{
-
-                //throw new Exception(builder.ToString());
-            //}
-
-            UsuarioDAL pes = new UsuarioDAL();
+            ValidarCliente(cliente);
+            UsuarioDAL dal = new UsuarioDAL();
             try
             {
-
-                UsuarioDTO usuario = pes.Pequisar(cliente);
-                return usuario;
-                    
+                dal.Editar(cliente);
             }
             catch (Exception ex)
             {
                 //Loga o erro para o administrador
                 File.AppendAllText("log.txt", ex.Message + "\r\n" + ex.StackTrace);
                 //Relança a exceção e a captura na interface gráfica
-                throw new Exception("Erro no banco de dados. Contate o adm.");
+                throw new Exception("Erro no banco de dados durante a edição. Contate o adm.");
             }
         }
 
-        public StringBuilder ValidarCliente(UsuarioDTO cliente)
+        public void ExcluirCliente(int id)
         {
-            StringBuilder builder = new ValidatorUsuarioBLL().ValidatorUsuario(cliente);
-
-            //Remove a máscara
-            cliente.CPF = cliente.CPF.Replace("-", "").Replace(".", "");
-            cliente.Ativo = true;
-
-            //Lança uma exceção caso o StringBuilder esteja preenchido
-            //com algum erro
-            if (builder.Length > 0)
+            if (id == 0)
             {
-                throw new Exception(builder.ToString());
+                throw new Exception("Para excluir é necessario selecionar um usuário antes.");
             }
-
-            return builder;
-
+            UsuarioDAL dal = new UsuarioDAL();
+            try
+            {
+                dal.Excluir(id);
+            }
+            catch (Exception ex)
+            {
+                //Loga o erro para o administrador
+                File.AppendAllText("log.txt", ex.Message + "\r\n" + ex.StackTrace);
+                //Relança a exceção e a captura na interface gráfica
+                throw new Exception("Erro no banco de dados durante a exclusão. Contate o adm.");
+            }
         }
 
         public List<UsuarioDTO> LerTodos()
@@ -110,16 +98,11 @@ namespace BLL
             List<UsuarioDTO> clientes = dal.LerTodos();
             for (int i = 0; i < clientes.Count; i++)
             {
-                clientes[i].CPF = clientes[i].CPF.Insert(3, ".").Insert(7, ".").Insert(11, "-");
-
+                //Inserirmos de volta a máscara do CPF para cada cliente.
+                clientes[i].CPF =
+                    clientes[i].CPF.Insert(3, ".").Insert(7, ".").Insert(11, "-");
             }
             return clientes;
-        }
-
-        public void ExcluirCliente(int id)
-        {
-            UsuarioDAL dal = new UsuarioDAL();
-            dal.Excluir(id);
         }
     }
 }
