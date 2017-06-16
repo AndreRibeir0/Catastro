@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormCadastro", "FormCadastro\FormCadastro.csproj", "{4A00F78D-9F89-4AB1-ADA4-4F33FD688038}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{4CEA3F32-B9B9-44CC-936E-DA954B9EC65E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{800E29AE-8216-49A9-8733-AD8D0A0CEA21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormProdutos", "FormProdutos\FormProdutos.csproj", "{558261B7-E31D-4D06-B2C5-673CBAE463F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{800E29AE-8216-49A9-8733-AD8D0A0CEA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{800E29AE-8216-49A9-8733-AD8D0A0CEA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{800E29AE-8216-49A9-8733-AD8D0A0CEA21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{558261B7-E31D-4D06-B2C5-673CBAE463F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{558261B7-E31D-4D06-B2C5-673CBAE463F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{558261B7-E31D-4D06-B2C5-673CBAE463F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{558261B7-E31D-4D06-B2C5-673CBAE463F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
