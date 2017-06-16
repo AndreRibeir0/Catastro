@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace FormProdutos
 {
-    public partial class Form1 : Form
+    public partial class cmbUnidadeMedida : Form
     {
-        public Form1()
+        public cmbUnidadeMedida()
         {
             InitializeComponent();
         }
@@ -88,12 +88,20 @@ namespace FormProdutos
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = bll.LerTodos();
+            
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             ProdutoDTO produto = (ProdutoDTO)dataGridView1.SelectedRows[0].DataBoundItem;
             txtID.Text = produto.ID.ToString();
+            txtDescricao.Text = produto.Descricao.ToString();
+            txtPreco.Text = produto.Preco.ToString();
+            
+            txtQtdEstoque.Text = produto.QtdEstoque.ToString();
+            txtQtdEstoqueMinimo.Text = produto.QtdEstoqueMinimo.ToString();
+            txtCategoria.Text = produto.Categoria.ToString();
+            chkAtivo.Checked = produto.Ativo;
          
             DesabilitarNovo();
         }

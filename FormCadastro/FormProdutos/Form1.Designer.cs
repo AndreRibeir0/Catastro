@@ -1,6 +1,6 @@
 ﻿namespace FormProdutos
 {
-    partial class Form1
+    partial class cmbUnidadeMedida
     {
         /// <summary>
         /// Required designer variable.
@@ -37,7 +37,6 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtDescricao = new System.Windows.Forms.TextBox();
             this.txtPreco = new System.Windows.Forms.TextBox();
-            this.txtUnidadeMedida = new System.Windows.Forms.TextBox();
             this.txtQtdEstoque = new System.Windows.Forms.TextBox();
             this.txtQtdEstoqueMinimo = new System.Windows.Forms.TextBox();
             this.chkAtivo = new System.Windows.Forms.CheckBox();
@@ -49,6 +48,7 @@
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtCategoria = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,13 +126,6 @@
             this.txtPreco.Name = "txtPreco";
             this.txtPreco.Size = new System.Drawing.Size(100, 20);
             this.txtPreco.TabIndex = 9;
-            // 
-            // txtUnidadeMedida
-            // 
-            this.txtUnidadeMedida.Location = new System.Drawing.Point(121, 111);
-            this.txtUnidadeMedida.Name = "txtUnidadeMedida";
-            this.txtUnidadeMedida.Size = new System.Drawing.Size(100, 20);
-            this.txtUnidadeMedida.TabIndex = 10;
             // 
             // txtQtdEstoque
             // 
@@ -237,11 +230,20 @@
             this.txtCategoria.Size = new System.Drawing.Size(100, 20);
             this.txtCategoria.TabIndex = 60;
             // 
-            // Form1
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(121, 111);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(98, 21);
+            this.comboBox1.TabIndex = 61;
+            // 
+            // cmbUnidadeMedida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 328);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.txtCategoria);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnNovo);
@@ -253,7 +255,6 @@
             this.Controls.Add(this.chkAtivo);
             this.Controls.Add(this.txtQtdEstoqueMinimo);
             this.Controls.Add(this.txtQtdEstoque);
-            this.Controls.Add(this.txtUnidadeMedida);
             this.Controls.Add(this.txtPreco);
             this.Controls.Add(this.txtDescricao);
             this.Controls.Add(this.txtID);
@@ -263,7 +264,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "cmbUnidadeMedida";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -283,7 +284,6 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.TextBox txtDescricao;
         private System.Windows.Forms.TextBox txtPreco;
-        private System.Windows.Forms.TextBox txtUnidadeMedida;
         private System.Windows.Forms.TextBox txtQtdEstoque;
         private System.Windows.Forms.TextBox txtQtdEstoqueMinimo;
         private System.Windows.Forms.CheckBox chkAtivo;
@@ -295,6 +295,7 @@
         private System.Windows.Forms.Button btnCadastrar;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtCategoria;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
