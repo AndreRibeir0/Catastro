@@ -58,6 +58,7 @@ namespace FormProdutos
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
+
             //CRUD
             ProdutoDTO produto = new ProdutoDTO();
             produto.Descricao = txtDescricao.Text;
@@ -66,6 +67,7 @@ namespace FormProdutos
             produto.QtdEstoque = Convert.ToDouble(txtQtdEstoque.Text);
             produto.QtdEstoqueMinimo = Convert.ToDouble(txtQtdEstoqueMinimo.Text);
             produto.Categoria = Convert.ToString(txtCategoria.Text);
+            produto.Ativo = chkAtivo.Checked;
             
             //falta o ativo
 
@@ -91,12 +93,8 @@ namespace FormProdutos
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             ProdutoDTO produto = (ProdutoDTO)dataGridView1.SelectedRows[0].DataBoundItem;
-            txtID.Text = produto.
-            
-            txtNome.Text = 
-            txtEmail.Text = cliente.Email;
-            txtCPFCNPJ.Text = cliente.CPF;
-            dtpDataNascimento.Value = cliente.DataNascimento;
+            txtID.Text = produto.ID.ToString();
+         
             DesabilitarNovo();
         }
 
