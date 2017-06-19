@@ -1,6 +1,6 @@
 ﻿namespace FormProdutos
 {
-    partial class cmbUnidadeMedida
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -47,8 +47,8 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtCategoria = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbUnidadeMedida = new System.Windows.Forms.ComboBox();
+            this.cmbCategoria = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,9 +57,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(18, 13);
+            this.label1.Size = new System.Drawing.Size(21, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ID";
+            this.label1.Text = "ID:";
             // 
             // label2
             // 
@@ -108,9 +108,10 @@
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(121, 13);
+            this.txtID.Enabled = false;
+            this.txtID.Location = new System.Drawing.Point(40, 13);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(100, 20);
+            this.txtID.Size = new System.Drawing.Size(181, 20);
             this.txtID.TabIndex = 7;
             // 
             // txtDescricao
@@ -144,7 +145,7 @@
             // chkAtivo
             // 
             this.chkAtivo.AutoSize = true;
-            this.chkAtivo.Location = new System.Drawing.Point(247, 12);
+            this.chkAtivo.Location = new System.Drawing.Point(227, 15);
             this.chkAtivo.Name = "chkAtivo";
             this.chkAtivo.Size = new System.Drawing.Size(50, 17);
             this.chkAtivo.TabIndex = 13;
@@ -153,10 +154,14 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(315, 13);
+            this.dataGridView1.Location = new System.Drawing.Point(283, 13);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(353, 207);
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(385, 207);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
@@ -202,6 +207,7 @@
             this.btnUpdate.TabIndex = 55;
             this.btnUpdate.Text = "EDITAR";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnCadastrar
             // 
@@ -223,28 +229,29 @@
             this.label7.TabIndex = 59;
             this.label7.Text = "Categoria:";
             // 
-            // txtCategoria
-            // 
-            this.txtCategoria.Location = new System.Drawing.Point(121, 206);
-            this.txtCategoria.Name = "txtCategoria";
-            this.txtCategoria.Size = new System.Drawing.Size(100, 20);
-            this.txtCategoria.TabIndex = 60;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(121, 111);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(98, 21);
-            this.comboBox1.TabIndex = 61;
-            // 
             // cmbUnidadeMedida
+            // 
+            this.cmbUnidadeMedida.FormattingEnabled = true;
+            this.cmbUnidadeMedida.Location = new System.Drawing.Point(121, 111);
+            this.cmbUnidadeMedida.Name = "cmbUnidadeMedida";
+            this.cmbUnidadeMedida.Size = new System.Drawing.Size(98, 21);
+            this.cmbUnidadeMedida.TabIndex = 61;
+            // 
+            // cmbCategoria
+            // 
+            this.cmbCategoria.FormattingEnabled = true;
+            this.cmbCategoria.Location = new System.Drawing.Point(121, 213);
+            this.cmbCategoria.Name = "cmbCategoria";
+            this.cmbCategoria.Size = new System.Drawing.Size(100, 21);
+            this.cmbCategoria.TabIndex = 62;
+            // 
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 328);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.txtCategoria);
+            this.Controls.Add(this.cmbCategoria);
+            this.Controls.Add(this.cmbUnidadeMedida);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.btnRefresh);
@@ -264,7 +271,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "cmbUnidadeMedida";
+            this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -294,8 +301,8 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnCadastrar;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtCategoria;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbUnidadeMedida;
+        private System.Windows.Forms.ComboBox cmbCategoria;
     }
 }
 

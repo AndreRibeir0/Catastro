@@ -104,5 +104,23 @@ namespace BLL
             }
             return clientes;
         }
+
+        public UsuarioDTO LerUsuario(int id)
+        {
+                       
+            try
+            {
+                UsuarioDAL dal = new UsuarioDAL();
+                UsuarioDTO cliente = dal.LerUsuario(id);
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+                //Loga o erro para o administrador
+                File.AppendAllText("log.txt", ex.Message + "\r\n" + ex.StackTrace);
+                //Relança a exceção e a captura na interface gráfica
+                throw new Exception("Erro no banco de dados durante a pesquisa. Contate o adm.");
+            }           
+        }
     }
 }

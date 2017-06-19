@@ -17,18 +17,19 @@ namespace DAL
             //de dados
             using (SqlConnection connection = new SqlConnection())
             {
+                
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
-                    "INSERT INTO PRODUTO (DESCRICAO,PRECO,UNIDADEMEDIDA,QTDESTOQUE,QTDESTOQUEMINIMO,CATEGORIA,ATIVO) VALUES (@DESCRICAO,@PRECO,@UNIDADEMEDIDA,@QTDESTOQUE,@QTDESTOQUEMINIMO,@CATEGORIA,@ATIVO)";
+                    "INSERT INTO PRODUTO (DESCRICAO,PRECO,UNIDADEMEDIDA,QTDESTOQUE,QTDESTOQUEMINIMO,IDCATEGORIA,ATIVO) VALUES (@DESCRICAO,@PRECO,@UNIDADEMEDIDA,@QTDESTOQUE,@QTDESTOQUEMINIMO,@IDCATEGORIA,@ATIVO)";
                 command.Parameters.AddWithValue("@DESCRICAO", produto.Descricao);
                 command.Parameters.AddWithValue("@PRECO", produto.Preco);
                 command.Parameters.AddWithValue("@UNIDADEMEDIDA", produto.UnidadeMedida);
                 command.Parameters.AddWithValue("@QTDESTOQUE", produto.QtdEstoque);
                 command.Parameters.AddWithValue("@QTDESTOQUEMINIMO", produto.QtdEstoqueMinimo);
-                command.Parameters.AddWithValue("@CATEGORIA", produto.Categoria);
+                command.Parameters.AddWithValue("@IDCATEGORIA", produto.Categoria);
                 command.Parameters.AddWithValue("@ATIVO", produto.Ativo);
                 command.Connection = connection;
                 connection.Open();
@@ -42,16 +43,17 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
-                    "UPDATE PRODUTO SET DESCRICAO = @DESCRICAO, PRECO = @PRECO, UNIDADEMEDIDA = @UNIDADEMEDIDA, QTDESTOQUE = @QTDESTOQUE, QTDESTOQUEMINIMO = @QTDESTOQUEMINIMO, CATEGORIA = @CATEGORIA, ATIVO = @ATIVO WHERE ID = @ID";
+                    "UPDATE PRODUTO SET DESCRICAO = @DESCRICAO, PRECO = @PRECO, UNIDADEMEDIDA = @UNIDADEMEDIDA, QTDESTOQUE = @QTDESTOQUE, QTDESTOQUEMINIMO = @QTDESTOQUEMINIMO, IDCATEGORIA = @IDCATEGORIA, ATIVO = @ATIVO WHERE ID = @ID";
+                command.Parameters.AddWithValue("ID", produto.ID);
                 command.Parameters.AddWithValue("@DESCRICAO", produto.Descricao);
                 command.Parameters.AddWithValue("@PRECO", produto.Preco);
                 command.Parameters.AddWithValue("@UNIDADEMEDIDA", produto.UnidadeMedida);
                 command.Parameters.AddWithValue("@QTDESTOQUE", produto.QtdEstoque);
                 command.Parameters.AddWithValue("@QTDESTOQUEMINIMO", produto.QtdEstoqueMinimo);
-                command.Parameters.AddWithValue("@CATEGORIA", produto.Categoria);
+                command.Parameters.AddWithValue("@IDCATEGORIA", produto.Categoria);
                 command.Parameters.AddWithValue("@ATIVO", produto.Ativo);
                 command.Connection = connection;
                 connection.Open();
@@ -65,7 +67,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "DELETE FROM PRODUTO WHERE ID = @ID";
@@ -85,7 +87,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "SELECT * FROM PRODUTO";
@@ -100,17 +102,19 @@ namespace DAL
                     //o tipo especifico da classe
                     ProdutoDTO produto = new ProdutoDTO();
                     produto.ID = Convert.ToInt32(reader["ID"]);
-                    produto.Descricao = Convert.ToString(reader["NOME"]);
-                    produto.UnidadeMedida = (int)reader["UNIDADEMEDIDA"];
-                    produto.QtdEstoque = (double)reader["EMAIL"];
-                    produto.QtdEstoqueMinimo = (double)reader["DATANASCIMENTO"];
-                    produto.Categoria = (string)reader["CATEGORIA"];
+                    produto.Descricao = Convert.ToString(reader["DESCRICAO"]);
+                    produto.Preco = (double)(reader["PRECO"]);
+                    produto.UnidadeMedida = (EnumProdutoDTO)(reader["UNIDADEMEDIDA"]);
+                    produto.QtdEstoque= (double)reader["QTDESTOQUE"];
+                    produto.QtdEstoqueMinimo = (double)reader["QTDESTOQUEMINIMO"];
+                    produto.Categoria = Convert.ToInt32(reader["IDCATEGORIA"]);
                     produto.Ativo = (bool)reader["ATIVO"];
                     produtos.Add(produto);
                 }
                 return produtos;
             }//Fim da cláusula USING, o método Dispose da conexão será chamado.
-        } 
+        }
+       
     }
 }
     

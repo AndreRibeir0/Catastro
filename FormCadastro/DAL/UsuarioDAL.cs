@@ -19,7 +19,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "INSERT INTO USUARIO (NOME,CPF,EMAIL,DATANASCIMENTO,ATIVO) VALUES (@NOME,@CPF,@EMAIL,@DATANASCIMENTO,@ATIVO)";
@@ -40,7 +40,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "UPDATE USUARIO SET NOME = @NOME, EMAIL = @EMAIL WHERE ID = @ID";
@@ -59,7 +59,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "DELETE FROM USUARIO WHERE ID = @ID";
@@ -79,7 +79,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "SELECT * FROM USUARIO";
@@ -103,6 +103,44 @@ namespace DAL
                 }
                 return clientes;
             }//Fim da cláusula USING, o método Dispose da conexão será chamado.
-        } 
+        }
+
+        public UsuarioDTO LerUsuario(int idCliente)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                //string de conexão
+                connection.ConnectionString =
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
+                SqlCommand command = new SqlCommand();
+                command.CommandText =
+                    "SELECT * FROM USUARIO";
+                command.Connection = connection;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                List<UsuarioDTO> clientes = new List<UsuarioDTO>();
+                while (reader.Read())
+                {
+                    //Como o objeto reader["COLUNABANCO"] retorna um OBJECT
+                    //é papel do programador fazer uma conversão para
+                    //o tipo especifico da classe
+                    UsuarioDTO cliente = new UsuarioDTO();
+                    cliente.ID = Convert.ToInt32(reader["ID"]);
+                    cliente.Nome = Convert.ToString(reader["NOME"]);
+                    cliente.CPF = (string)reader["CPF"];
+                    cliente.Email = (string)reader["EMAIL"];
+                    cliente.DataNascimento = (DateTime)reader["DATANASCIMENTO"];
+                    cliente.Ativo = (bool)reader["ATIVO"];
+                    clientes.Add(cliente);
+
+                    if (idCliente == cliente.ID)
+                    {
+                        return cliente;
+                    }
+                }
+                UsuarioDTO clienteVazio = new UsuarioDTO();
+                return clienteVazio;
+            }//Fim da cláusula USING, o método Dispose da conexão será chamado.
+        }
     }
 }

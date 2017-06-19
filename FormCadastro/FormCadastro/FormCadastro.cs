@@ -76,7 +76,7 @@ namespace FormCadastro
         }
 
         private void FormCadastro_Load_1(object sender, EventArgs e)
-        {
+        {            
             dataGridView1.DataSource = bll.LerTodos();
         }
 

@@ -24,17 +24,17 @@ namespace BLL
                 builder.AppendLine("O preço deve ser maior que ZERO.");
             }
 
-            if (produto.QtdEstoque < 1)
+            if (produto.QtdEstoque < produto.QtdEstoqueMinimo)
             {
                 builder.AppendLine("A Qtd. do estoque deve ser maior que a Qtd. do estoque mínimo.");
             }
 
-            if (produto.QtdEstoqueMinimo <= produto.QtdEstoque)
+            if (produto.QtdEstoqueMinimo >= produto.QtdEstoque)
 	        {
                 builder.AppendLine("A Qtd. do 'estoque mínimo' deve ser maior que a Qtd. do estoque.");
 	        }
 
-            if (String.IsNullOrWhiteSpace(produto.Categoria))
+            if (produto.Categoria < 0)
             {
                 builder.AppendLine("A categoria deve ser informada");
             }

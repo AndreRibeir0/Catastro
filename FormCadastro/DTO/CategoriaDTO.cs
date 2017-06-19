@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public enum UnumProdutoDTO
+    public class CategoriaDTO
     {
-        Kg, Lts, Unidade, Caixa
+        public int ID { get; set; }
+        public string Categoria { get; set; } 
     }
 }

@@ -93,5 +93,12 @@ namespace BLL
             List<ProdutoDTO> produtos = dal.LerTodos();
             return produtos;
         }
+
+        public List<CategoriaDTO> LerTodasCategorias()
+        {
+            CategoriaDAL dal = new CategoriaDAL();
+            List<CategoriaDTO> categorias = dal.LerTodasCategorias();
+            return categorias;
+        }
     }
 }

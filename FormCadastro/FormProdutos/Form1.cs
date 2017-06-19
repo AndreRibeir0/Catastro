@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace FormProdutos
 {
-    public partial class cmbUnidadeMedida : Form
+    public partial class Form1 : Form
     {
-        public cmbUnidadeMedida()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -48,7 +48,8 @@ namespace FormProdutos
             txtPreco.Clear();
             txtQtdEstoque.Clear();
             txtQtdEstoqueMinimo.Clear();
-            txtUnidadeMedida.Clear();
+            cmbUnidadeMedida.Select(0,0);
+            cmbCategoria.Select(0,0);
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
@@ -63,13 +64,12 @@ namespace FormProdutos
             ProdutoDTO produto = new ProdutoDTO();
             produto.Descricao = txtDescricao.Text;
             produto.Preco = Convert.ToDouble(txtPreco.Text);
-            produto.UnidadeMedida = Convert.ToInt32(txtUnidadeMedida.Text);
+            produto.UnidadeMedida = (EnumProdutoDTO)cmbUnidadeMedida.SelectedIndex;
             produto.QtdEstoque = Convert.ToDouble(txtQtdEstoque.Text);
-            produto.QtdEstoqueMinimo = Convert.ToDouble(txtQtdEstoqueMinimo.Text);
-            produto.Categoria = Convert.ToString(txtCategoria.Text);
-            produto.Ativo = chkAtivo.Checked;
-            
-            //falta o ativo
+            produto.QtdEstoqueMinimo = Convert.ToDouble(txtQtdEstoqueMinimo.Text);            
+            produto.Categoria = (++(cmbCategoria.SelectedIndex));
+            produto.Ativo = chkAtivo.Checked;         
+           
 
             try
             {
@@ -87,7 +87,13 @@ namespace FormProdutos
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            HabilitarNovo();
+            cmbCategoria.DisplayMember = "CATEGORIA";            
+            cmbCategoria.DataSource = bll.LerTodasCategorias();
             dataGridView1.DataSource = bll.LerTodos();
+            cmbUnidadeMedida.DataSource = Enum.GetValues(typeof(EnumProdutoDTO));
+            
             
         }
 
@@ -97,10 +103,11 @@ namespace FormProdutos
             txtID.Text = produto.ID.ToString();
             txtDescricao.Text = produto.Descricao.ToString();
             txtPreco.Text = produto.Preco.ToString();
-            
             txtQtdEstoque.Text = produto.QtdEstoque.ToString();
             txtQtdEstoqueMinimo.Text = produto.QtdEstoqueMinimo.ToString();
-            txtCategoria.Text = produto.Categoria.ToString();
+            int aux = (int)produto.Categoria;
+            cmbCategoria.SelectedIndex = (--(aux));
+            cmbUnidadeMedida.SelectedItem = (EnumProdutoDTO)produto.UnidadeMedida;
             chkAtivo.Checked = produto.Ativo;
          
             DesabilitarNovo();
@@ -138,6 +145,41 @@ namespace FormProdutos
             }
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            ProdutoDTO produto = new ProdutoDTO();
 
+            try
+            {
+                produto.ID = Convert.ToInt32(txtID.Text);
+                produto.Descricao = txtDescricao.Text;
+                produto.Preco = Convert.ToDouble(txtPreco.Text);
+                produto.UnidadeMedida = (EnumProdutoDTO)cmbUnidadeMedida.SelectedIndex;
+                produto.QtdEstoque = Convert.ToDouble(txtQtdEstoque.Text);
+                produto.QtdEstoqueMinimo = Convert.ToDouble(txtQtdEstoqueMinimo.Text);
+                produto.Categoria = (++(cmbCategoria.SelectedIndex));
+                produto.Ativo = chkAtivo.Checked;
+
+            }
+            catch (FormatException)
+            {
+
+            }
+
+            try
+            {
+
+                bll.EditarProduto(produto);
+                MessageBox.Show("Editado com sucesso.");
+                LimparCampos();
+                dataGridView1.DataSource = bll.LerTodos();
+                DesabilitarNovo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
+    
 }

@@ -16,7 +16,7 @@ namespace FormProdutos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new cmbUnidadeMedida());
+            Application.Run(new Form1());
         }
     }
 }
