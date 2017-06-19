@@ -19,8 +19,7 @@ namespace DAL
             {
                 
                 //string de conexão
-                connection.ConnectionString =
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
+                connection.ConnectionString = DbConfig.ConnectionString;                    
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "INSERT INTO PRODUTO (DESCRICAO,PRECO,UNIDADEMEDIDA,QTDESTOQUE,QTDESTOQUEMINIMO,IDCATEGORIA,ATIVO) VALUES (@DESCRICAO,@PRECO,@UNIDADEMEDIDA,@QTDESTOQUE,@QTDESTOQUEMINIMO,@IDCATEGORIA,@ATIVO)";
@@ -42,8 +41,8 @@ namespace DAL
             using (SqlConnection connection = new SqlConnection())
             {
                 //string de conexão
-                connection.ConnectionString =
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
+                connection.ConnectionString = DbConfig.ConnectionString;
+                    
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "UPDATE PRODUTO SET DESCRICAO = @DESCRICAO, PRECO = @PRECO, UNIDADEMEDIDA = @UNIDADEMEDIDA, QTDESTOQUE = @QTDESTOQUE, QTDESTOQUEMINIMO = @QTDESTOQUEMINIMO, IDCATEGORIA = @IDCATEGORIA, ATIVO = @ATIVO WHERE ID = @ID";
@@ -66,8 +65,7 @@ namespace DAL
             using (SqlConnection connection = new SqlConnection())
             {
                 //string de conexão
-                connection.ConnectionString =
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
+                connection.ConnectionString = DbConfig.ConnectionString;                    
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "DELETE FROM PRODUTO WHERE ID = @ID";
@@ -86,8 +84,7 @@ namespace DAL
             using (SqlConnection connection = new SqlConnection())
             {
                 //string de conexão
-                connection.ConnectionString =
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\PRODUTO.mdf;Integrated Security=True;Connect Timeout=30";
+                connection.ConnectionString = DbConfig.ConnectionString;                    
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "SELECT * FROM PRODUTO";

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BLL
@@ -37,7 +38,8 @@ namespace BLL
             if (produto.Categoria < 0)
             {
                 builder.AppendLine("A categoria deve ser informada");
-            }
+            }            
+            
 
             //Lança uma exceção caso o StringBuilder esteja preenchido
             //com algum erro

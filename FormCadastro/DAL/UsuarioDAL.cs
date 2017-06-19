@@ -19,7 +19,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "INSERT INTO USUARIO (NOME,CPF,EMAIL,DATANASCIMENTO,ATIVO) VALUES (@NOME,@CPF,@EMAIL,@DATANASCIMENTO,@ATIVO)";
@@ -40,7 +40,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "UPDATE USUARIO SET NOME = @NOME, EMAIL = @EMAIL WHERE ID = @ID";
@@ -59,7 +59,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "DELETE FROM USUARIO WHERE ID = @ID";
@@ -79,7 +79,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "SELECT * FROM USUARIO";
@@ -111,7 +111,7 @@ namespace DAL
             {
                 //string de conexão
                 connection.ConnectionString =
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Home\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
+                    @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\moc\Documents\USUARIO.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
                     "SELECT * FROM USUARIO";
