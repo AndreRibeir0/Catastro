@@ -40,7 +40,7 @@ namespace DAL
 
                 SqlCommand command = new SqlCommand();
                 command.CommandText =
-                    "UPDATE CATEGORIA SET DESCRICAO = CATEGORIA = @CATEGORIA WHERE ID = @ID";
+                    "UPDATE CATEGORIA SET CATEGORIA = @CATEGORIA WHERE ID = @ID";
                 command.Parameters.AddWithValue("ID", categoria.ID);                
                 command.Parameters.AddWithValue("@IDCATEGORIA", categoria.Categoria);                
                 command.Connection = connection;

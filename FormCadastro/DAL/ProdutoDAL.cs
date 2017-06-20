@@ -97,14 +97,14 @@ namespace DAL
                     //Como o objeto reader["COLUNABANCO"] retorna um OBJECT
                     //é papel do programador fazer uma conversão para
                     //o tipo especifico da classe
-                    ProdutoDTO produto = new ProdutoDTO();
+                    ProdutoDTO produto = new ProdutoDTO();                   
                     produto.ID = Convert.ToInt32(reader["ID"]);
                     produto.Descricao = Convert.ToString(reader["DESCRICAO"]);
                     produto.Preco = (double)(reader["PRECO"]);
                     produto.UnidadeMedida = (EnumProdutoDTO)(reader["UNIDADEMEDIDA"]);
                     produto.QtdEstoque= (double)reader["QTDESTOQUE"];
                     produto.QtdEstoqueMinimo = (double)reader["QTDESTOQUEMINIMO"];
-                    produto.Categoria = Convert.ToInt32(reader["IDCATEGORIA"]);
+                    produto.Categoria = (int)(reader["IDCATEGORIA"]);
                     produto.Ativo = (bool)reader["ATIVO"];
                     produtos.Add(produto);
                 }

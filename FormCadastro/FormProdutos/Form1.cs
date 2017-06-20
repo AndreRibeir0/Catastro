@@ -48,8 +48,8 @@ namespace FormProdutos
             txtPreco.Clear();
             txtQtdEstoque.Clear();
             txtQtdEstoqueMinimo.Clear();
-            cmbUnidadeMedida.Select(0,0);
-            cmbCategoria.Select(0,0);
+            cmbUnidadeMedida.SelectedValue = 1;
+            cmbCategoria.SelectedValue = 1;
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace FormProdutos
             produto.UnidadeMedida = (EnumProdutoDTO)cmbUnidadeMedida.SelectedIndex;
             produto.QtdEstoque = Convert.ToDouble(txtQtdEstoque.Text);
             produto.QtdEstoqueMinimo = Convert.ToDouble(txtQtdEstoqueMinimo.Text);            
-            produto.Categoria = (++(cmbCategoria.SelectedIndex));
+            produto.Categoria = (int)cmbCategoria.SelectedValue;
             produto.Ativo = chkAtivo.Checked;         
            
 
@@ -89,7 +89,8 @@ namespace FormProdutos
         {
 
             HabilitarNovo();
-            cmbCategoria.DisplayMember = "CATEGORIA";            
+            cmbCategoria.DisplayMember = "CATEGORIA";
+            cmbCategoria.ValueMember = "ID";
             cmbCategoria.DataSource = bll.LerTodasCategorias();
             dataGridView1.DataSource = bll.LerTodos();
             cmbUnidadeMedida.DataSource = Enum.GetValues(typeof(EnumProdutoDTO));
@@ -104,9 +105,8 @@ namespace FormProdutos
             txtDescricao.Text = produto.Descricao.ToString();
             txtPreco.Text = produto.Preco.ToString();
             txtQtdEstoque.Text = produto.QtdEstoque.ToString();
-            txtQtdEstoqueMinimo.Text = produto.QtdEstoqueMinimo.ToString();
-            int aux = (int)produto.Categoria;
-            cmbCategoria.SelectedIndex = (--(aux));
+            txtQtdEstoqueMinimo.Text = produto.QtdEstoqueMinimo.ToString();            
+            cmbCategoria.SelectedValue = produto.Categoria;
             cmbUnidadeMedida.SelectedItem = (EnumProdutoDTO)produto.UnidadeMedida;
             chkAtivo.Checked = produto.Ativo;
          
@@ -157,7 +157,7 @@ namespace FormProdutos
                 produto.UnidadeMedida = (EnumProdutoDTO)cmbUnidadeMedida.SelectedIndex;
                 produto.QtdEstoque = Convert.ToDouble(txtQtdEstoque.Text);
                 produto.QtdEstoqueMinimo = Convert.ToDouble(txtQtdEstoqueMinimo.Text);
-                produto.Categoria = (++(cmbCategoria.SelectedIndex));
+                produto.Categoria = (int)cmbCategoria.SelectedValue;
                 produto.Ativo = chkAtivo.Checked;
 
             }
