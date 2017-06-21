@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DTO
+{
+    public class UsuarioDTO
+    {
+        public int ID { get; private set; }
+        public string Nome { get; private set; }        
+        public string Senha { get; private set; }
+        public int Tipo { get; private set; }
+
+        public void SetID(int id)
+        {
+            this.ID = id;
+        }
+        public void SetNome(string nome)
+        {
+            this.Nome = nome;
+        }
+
+        public void SetSenha(string senha)
+        {
+            this.Senha = senha;
+        }
+
+        public void SetTipo(int tipo)
+        {
+            this.Tipo = tipo;
+        }
+
+    }   
+}
